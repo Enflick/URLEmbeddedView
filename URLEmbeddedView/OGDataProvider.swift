@@ -25,13 +25,14 @@ public final class OGDataProvider: NSObject {
         set { OGDataCacheManager.shared.updateInterval = newValue }
     }
     
-    @discardableResult
-    @objc public func fetchOGDataWithUrlString(_ urlString: String, completion: ((OpenGraphData, Error?) -> Void)? = nil) -> String {
-        return fetchOGData(urlString: urlString) { completion?($0 as OpenGraphData, $1) }
-    }
+//    @discardableResult
+//    @objc public func fetchOGDataWithUrlString(_ urlString: String, completion: ((OpenGraphData, Error?) -> Void)? = nil) -> String {
+//        return fetchOGData(urlString: urlString) { completion?($0 as OpenGraphData, $1) }
+//    }
     
     @discardableResult
-    public func fetchOGData(urlString: String, completion: ((OpenGraph.Data, Error?) -> Void)? = nil) -> String {
+    public func fetchOGData(urlString: String,
+                            completion: ((OpenGraph.Data, Error?) -> Void)? = nil) -> String {
         let uuid = UUID()
         OGData.fetchOrInsertOGData(url: urlString) { [weak self] ogData in
             guard let me = self else { return }
